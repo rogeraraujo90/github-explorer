@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
 const Title = styled.h1`
@@ -9,7 +9,7 @@ const Title = styled.h1`
   line-height: 56px;
 `;
 
-const Form = styled.form`
+const Form = styled.form<{ hasError: boolean }>`
   display: flex;
   margin-top: 40px;
   max-width: 700px;
@@ -18,9 +18,16 @@ const Form = styled.form`
     flex: 1;
     height: 70px;
     padding: 0 24px;
-    border: 0;
+    border: 2px solid #fff;
+    border-right: 0;
     border-radius: 5px 0 0 5px;
     color: #3a3a3a;
+
+    ${({ hasError }) =>
+      hasError &&
+      css`
+        border-color: red;
+      `}
 
     &::placeholder {
       color: #a8a8b3;
@@ -95,4 +102,10 @@ const Repositories = styled.div`
   }
 `;
 
-export { Title, Form, Repositories };
+const Error = styled.span`
+  margin-top: 8px;
+  color: red;
+  display: block;
+`;
+
+export { Title, Form, Repositories, Error };
